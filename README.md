@@ -1,6 +1,10 @@
 # Gogh
 A Gallery App with Fluent Design. Based on Google's discontinued Picasa software.
 
+## Notion
+https://www.notion.so/Gogh-A-Gallery-App-with-Fluent-Design-a6d4e57855214b99b2ab1d8cbdcd1ece
+Link to my Notion page for Gogh. Will be updating this as development happens, including the mini Trello board. Will add sections for feedback TBD.
+
 ## Current Roadmap 
 ### Alpha - August 2020 
 - Image handling (jpg, png, gif) 
