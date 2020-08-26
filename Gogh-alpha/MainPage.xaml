@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="Gogh_alpha.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Gogh_alpha"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    
+    
+    Background="{ThemeResource SystemControlChromeHighAcrylicWindowMediumBrush}">
+
+    <Grid>
+        <ScrollViewer x:Name="Control1" Height="270" ZoomMode="Enabled"
+            IsVerticalScrollChainingEnabled="True"
+            ManipulationCompleted="Control1_ManipulationCompleted"
+            HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Disabled"
+            VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
+            <Image Source="/Assets/SampleMedia/treetops.jpg" AutomationProperties.Name="cliff" Stretch="None"
+           HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </ScrollViewer>
+
+    </Grid>
+</Page>
+    
