@@ -26,7 +26,7 @@ namespace Gogh_alpha
     {
         public MainPage()
         {
-            //MaximizeWindowOnLoad();
+            MaximizeWindowOnLoad();
 
             this.InitializeComponent();
 
@@ -49,9 +49,6 @@ namespace Gogh_alpha
 
         }
 
-        private void Control1_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
-        {
-            //ZoomSlider.Value = Control1.ZoomFactor;
-        }
+        
     }
 }
