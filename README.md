@@ -1,3 +1,6 @@
+![Gogh logo](https://github.com/stevenya97/Gogh/blob/alpha/Gogh-alpha/Assets/StoreLogo.scale-400.png)
+
+
 # Gogh
 A Gallery App with Fluent Design. Based on Google's discontinued Picasa software.
 
