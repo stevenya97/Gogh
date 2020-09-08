@@ -5,25 +5,68 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    
-    
+    xmlns:media="using:Microsoft.UI.Xaml.Media"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     Background="{ThemeResource SystemControlChromeMediumAcrylicWindowMediumBrush}">
     <!--{ThemeResource SystemControlAcrylicWindowBrush}-->
-
-    <!--<Image Source="/Assets/Wallpaper.jpg" Height="1000" VerticalAlignment="Center" HorizontalAlignment="Center" />-->
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <media:AcrylicBrush x:Key="CustomAcrylicBrush" BackgroundSource="HostBackdrop"
+                    TintOpacity="0" TintColor="#FF000000" FallbackColor="#FF008000" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
     
-    <ScrollViewer 
-                Name="ScrollViewerMain"
-                HorizontalScrollBarVisibility="Auto"
-                VerticalScrollBarVisibility="Auto"
+    
+    
+    <!--<Image Source="/Assets/Square150x150Logo.scale-200" Height="1000" VerticalAlignment="Center" HorizontalAlignment="Center" />-->
+    <Grid x:Name="grid">
+
+        <Grid.RowDefinitions>
+            
+           
+        </Grid.RowDefinitions>
+
+        <ScrollViewer 
+            x:Name="ScrollViewerMain"
+                HorizontalScrollBarVisibility="Disabled"
+                VerticalScrollBarVisibility="Disabled"
                 MinZoomFactor="0.1" 
-                ZoomMode="Enabled">
-        <Image
+                MaxZoomFactor="5"
+                Grid.Row="2"
+                ZoomMode="Enabled"
+                PointerWheelChanged="Image_PointerWheelChanged"
+            >
+            <Image
+                    x:Name="Img"
                     MaxWidth="{Binding Path=ViewportWidth, ElementName=ScrollViewerMain}"
                     MaxHeight="{Binding Path=ViewportHeight, ElementName=ScrollViewerMain}"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Source="/Assets/Wallpaper.jpg"/>
-    </ScrollViewer>
+                    Stretch="Uniform"
+                    Source="/Assets/gogh.png"
+                    
+                    ManipulationMode="TranslateX, TranslateY"
+                    ManipulationStarted="Img_ManipulationStarted"
+                    ManipulationDelta="Img_ManipulationDelta"
+                    ManipulationCompleted="Img_ManipulationCompleted"
+                
+                    
+                >
+                <Image.RenderTransform>
+                    <CompositeTransform x:Name="Transform" />
+                </Image.RenderTransform>
+
+            </Image>
+                
+                
+                
+            
+            
+        </ScrollViewer>
+    </Grid>
 </Page>
     

@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.ViewManagement;
 
 namespace Gogh_alpha
 {
@@ -82,8 +83,33 @@ namespace Gogh_alpha
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
-        }
 
+            // using Windows.ApplicationModel.Core;
+
+            // Hide default title bar.
+            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            coreTitleBar.ExtendViewIntoTitleBar = true;
+            //Window.Current.SetTitleBar(null);
+            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+
+            if (titleBar != null)
+            {
+                // I only want to change the back button color here, but this code
+                // changes both the back button and resize/close buttons color too
+                titleBar.ButtonBackgroundColor = Windows.UI.Colors.Transparent;
+            }
+        }
+        protected override void OnFileActivated(FileActivatedEventArgs args)
+        {
+            // TODO: Handle file activation
+            // The number of files received is args.Files.Size
+            // The name of the first file is args.Files[0].Name
+            base.OnFileActivated(args);
+            var rootFrame = new Frame();
+            rootFrame.Navigate(typeof(MainPage), args);
+            Window.Current.Content = rootFrame;
+            Window.Current.Activate();
+        }
         private void TryEnablePrelaunch()
         {
             Windows.ApplicationModel.Core.CoreApplication.EnablePrelaunch(true);
