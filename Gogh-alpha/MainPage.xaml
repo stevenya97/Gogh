@@ -7,6 +7,8 @@
     mc:Ignorable="d"
     xmlns:media="using:Microsoft.UI.Xaml.Media"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:extensions="using:WinRTXamlToolkit.Controls.Extensions"
+    
     Background="{ThemeResource SystemControlChromeMediumAcrylicWindowMediumBrush}">
     <!--{ThemeResource SystemControlAcrylicWindowBrush}-->
     <Page.Resources>
@@ -19,15 +21,17 @@
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
     </Page.Resources>
-    
-    
-    
+
+
+
     <!--<Image Source="/Assets/Square150x150Logo.scale-200" Height="1000" VerticalAlignment="Center" HorizontalAlignment="Center" />-->
     <Grid x:Name="grid">
 
         <Grid.RowDefinitions>
-            
-           
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+
         </Grid.RowDefinitions>
 
         <ScrollViewer 
@@ -39,6 +43,7 @@
                 Grid.Row="2"
                 ZoomMode="Enabled"
                 PointerWheelChanged="Image_PointerWheelChanged"
+                Background="{ThemeResource SystemChromeBlackHighColor}"
             >
             <Image
                     x:Name="Img"
@@ -48,25 +53,78 @@
                     VerticalAlignment="Center"
                     Stretch="Uniform"
                     Source="/Assets/gogh.png"
-                    
-                    ManipulationMode="TranslateX, TranslateY"
+                    RenderTransformOrigin="0.5,0.5"
+                    ManipulationMode="TranslateX, TranslateY, System"
                     ManipulationStarted="Img_ManipulationStarted"
                     ManipulationDelta="Img_ManipulationDelta"
                     ManipulationCompleted="Img_ManipulationCompleted"
-                
+                    
                     
                 >
                 <Image.RenderTransform>
-                    <CompositeTransform x:Name="Transform" />
+                    <CompositeTransform x:Name="Transform"  />
                 </Image.RenderTransform>
 
             </Image>
-                
-                
-                
-            
-            
+
+
+
         </ScrollViewer>
+        <muxc:TeachingTip x:Name="tip" Target="{x:Bind cmdbar}" Title="Extra commands" Subtitle="Click to reveal useful commands">
+
+        </muxc:TeachingTip>
+        <CommandBar x:Name="cmdbar" DefaultLabelPosition="Right" Grid.Row="1" IsOpen="False" Background="Transparent" VerticalAlignment="Center">
+            <AppBarButton Label="View original" Click="View_Original_Click">
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7B3;"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton Label="Rotate left" Click="RotLeftButton_Click">
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE777;"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton Icon="RepeatAll" Label="Rotate right" Click="RotRightButton_Click"/>
+            <AppBarButton Icon="Crop" Label="Crop" Click="Crop_Click"/>
+            <AppBarButton Icon="Edit" Label="Edit" Click="Edit_Click"/>
+            <AppBarSeparator/>
+            <AppBarButton Icon="Back" Label="Previous" />
+
+            <AppBarButton  Icon="Forward" Label="Next" />
+
+
+            <CommandBar.SecondaryCommands >
+                <AppBarButton Icon="Save" Label="Save As">
+                    <AppBarButton.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control" Key="S"/>
+                    </AppBarButton.KeyboardAccelerators>
+                </AppBarButton>
+                <AppBarButton Icon="Zoom"  Label="Resize" />
+                <AppBarButton Icon="Copy" Label="Copy">
+                    <AppBarButton.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control" Key="C"/>
+                    </AppBarButton.KeyboardAccelerators>
+                </AppBarButton>
+
+                <AppBarSeparator/>
+                <AppBarButton Icon="OpenWith" Label="Open with" Click="OpenWith_ClickAsync"/>
+                <AppBarButton Icon="SetLockScreen" Label="Set as" />
+                <AppBarSeparator/>
+                <AppBarButton Icon="Preview"  Label="Zoom to Actual Size" Click="ActualSizeButton_Click"/>
+                <AppBarSeparator/>
+                <AppBarButton Icon="ContactInfo"  Label="File info" />
+                <AppBarSeparator/>
+                <AppBarButton Icon="Setting"  Label="Settings" Click="Settings_Click"/>
+            </CommandBar.SecondaryCommands>
+
+            <CommandBar.Content>
+                <TextBlock x:Name="txt" Text="" Margin="12,14"/>
+            </CommandBar.Content>
+        </CommandBar>
+        
+        
+
     </Grid>
+    
 </Page>
     

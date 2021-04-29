@@ -86,18 +86,7 @@ namespace Gogh_alpha
 
             // using Windows.ApplicationModel.Core;
 
-            // Hide default title bar.
-            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            coreTitleBar.ExtendViewIntoTitleBar = true;
-            //Window.Current.SetTitleBar(null);
-            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
-
-            if (titleBar != null)
-            {
-                // I only want to change the back button color here, but this code
-                // changes both the back button and resize/close buttons color too
-                titleBar.ButtonBackgroundColor = Windows.UI.Colors.Transparent;
-            }
+            InitTitleBar();
         }
         protected override void OnFileActivated(FileActivatedEventArgs args)
         {
@@ -109,6 +98,7 @@ namespace Gogh_alpha
             rootFrame.Navigate(typeof(MainPage), args);
             Window.Current.Content = rootFrame;
             Window.Current.Activate();
+            InitTitleBar();
         }
         private void TryEnablePrelaunch()
         {
@@ -136,6 +126,22 @@ namespace Gogh_alpha
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        void InitTitleBar()//Use this to enable seamless titlebar for OnLaunched and OnFileActivated events
+        {
+            // Hide default title bar.
+            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            coreTitleBar.ExtendViewIntoTitleBar = true;
+            //Window.Current.SetTitleBar(null);
+            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+
+            if (titleBar != null)
+            {
+                // I only want to change the back button color here, but this code
+                // changes both the back button and resize/close buttons color too
+                titleBar.ButtonBackgroundColor = Windows.UI.Colors.Transparent;
+            }
         }
     }
 }

@@ -41,7 +41,7 @@
         Description="Gogh-alpha"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
-		<uap:SplashScreen Image="Assets\SplashScreen.png" uap5:Optional="true" />
+		<uap:SplashScreen Image="Assets\SplashScreen.png" uap5:Optional="true"  BackgroundColor="whiteSmoke"/>
       </uap:VisualElements>
       <Extensions>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -49,6 +49,9 @@
             <uap:SupportedFileTypes>
               <uap:FileType ContentType="image/jpeg">.jpeg</uap:FileType>
               <uap:FileType ContentType="image/png">.png</uap:FileType>
+              <uap:FileType ContentType="image/jpg">.jpg</uap:FileType>
+              <uap:FileType ContentType="image/heic">.heic</uap:FileType>
+              <uap:FileType ContentType="image/heif">.heif</uap:FileType>
             </uap:SupportedFileTypes>
             <uap:DisplayName>Gogh</uap:DisplayName>
             <uap:Logo>gogh-tile.png</uap:Logo>
