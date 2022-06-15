@@ -25,7 +25,7 @@
         <controls:ImageCropper   x:Name="imageCropper" Grid.Row="2" CropShape="Rectangular"
                            ThumbPlacement="All"  Background="Gray" />
         
-        <AppBarButton x:Name="back"  Icon="Home" Label="Home" Click="AppBarButton_Click"/>
-        <TextBlock x:Name="txt" Grid.Row="1" Text="adsklfhskajfhd"></TextBlock>
+        <AppBarButton x:Name="back"  Icon="Back"  Click="AppBarButton_Click"/>
+        <TextBlock x:Name="txt" Grid.Row="1" Text="adsklfhskajfhd" HorizontalAlignment="Center"></TextBlock>
     </Grid>
 </Page>

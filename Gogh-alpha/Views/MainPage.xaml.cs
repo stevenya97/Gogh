@@ -21,6 +21,8 @@ using Windows.UI.Xaml.Media.Animation;
 using WinRTXamlToolkit;
 using WinRTXamlToolkit.AwaitableUI;
 using WinRTXamlToolkit.Controls.Extensions;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.Storage.FileProperties;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -35,7 +37,7 @@ namespace Gogh_alpha
         double dblDelta_Scroll;
         StorageFile temp;
         string path = "ms-appx:///Assets/gogh.png";
-
+        DataPackage dataPackage = new DataPackage();
         public MainPage()
         {
             //bool flag=ScrollViewerMain.ChangeView(null, null, 0.1f);
@@ -43,6 +45,7 @@ namespace Gogh_alpha
 
             this.InitializeComponent();
             InitialZoom();
+            
             //txt.Text = Img.Source;
             void MaximizeWindowOnLoad()
             {
@@ -64,6 +67,7 @@ namespace Gogh_alpha
                 
             }
 
+            //legacy support test
             async void ScreenCap()
             {
                 var renderTargetBitmap = new RenderTargetBitmap();
@@ -96,8 +100,12 @@ namespace Gogh_alpha
                     string strFilePath = fileArgs.Files[0].Path;
                     var file = (StorageFile)fileArgs.Files[0];
                     await LoadImageFile(file);
+                    temp = file;
                     txt.Text = strFilePath;
                     path = strFilePath;
+
+                    String t = temp.Path.ToString();
+                    System.Diagnostics.Debug.WriteLine("line test \n" + t);
                 }
             }
         }
@@ -119,7 +127,8 @@ namespace Gogh_alpha
                 imagebit.SetSource(read);
                 Img.Source = imagebit;
                 //txt.Text = imagebit.UriSource.ToString();
-                temp = file;
+                
+                
             }
             catch (Exception e)
             {
@@ -129,14 +138,15 @@ namespace Gogh_alpha
         }
         void Img_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
         {
-            // dim the image while panning
+            // dim the image while panning for testing purposes
             this.Img.Opacity = 0.4;
         }
 
         void Img_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            this.Transform.TranslateX += e.Delta.Translation.X/ ScrollViewerMain.ZoomFactor;
-            this.Transform.TranslateY += e.Delta.Translation.Y/ ScrollViewerMain.ZoomFactor;
+            //this.Transform.TranslateX += e.Delta.Translation.X/ ScrollViewerMain.ZoomFactor;
+            //this.Transform.TranslateY += e.Delta.Translation.Y/ ScrollViewerMain.ZoomFactor;
+            ScrollViewerMain.ChangeView(e.Delta.Translation.X, e.Delta.Translation.Y, null);
             
         }
 
@@ -154,8 +164,11 @@ namespace Gogh_alpha
             dblDelta_Scroll = (dblDelta_Scroll > 0) ? 1.2 : -0.8;
             //e.GetCurrentPoint(sc)
             txt.Text = temp.ToString();
-            double to = dblDelta_Scroll + ScrollViewerMain.ZoomFactor;
-            WinRTXamlToolkit.Controls.Extensions.ScrollViewerExtensions.ZoomToFactorWithAnimationAsync(ScrollViewerMain, to);
+            //double to = dblDelta_Scroll + ScrollViewerMain.ZoomFactor;
+            //WinRTXamlToolkit.Controls.Extensions.ScrollViewerExtensions.ZoomToFactorWithAnimationAsync(ScrollViewerMain, to);
+            double newvalue = e.GetCurrentPoint(sender as UIElement).Properties.MouseWheelDelta;
+            ScrollViewerMain.ChangeView(null, null, (float)newvalue);
+
             //ZoomToFactorWithAnimationAsync(to, 350);
             //double new_ScaleX = this.Transform.ScaleX / dblDelta_Scroll;
             //double new_ScaleY = this.Transform.ScaleY / dblDelta_Scroll;
@@ -293,10 +306,9 @@ namespace Gogh_alpha
             ContentDialog noWifiDialog = new ContentDialog
             {
                 Title = "Edit",
-                Content = "Editing not avaliable on this build.",
+                Content = "Not available in this build",
                 CloseButtonText = "Ok"
             };
-
             ContentDialogResult result = await noWifiDialog.ShowAsync();
         }
 
@@ -304,5 +316,67 @@ namespace Gogh_alpha
         {
             this.Frame.Navigate(typeof(Settings), new SuppressNavigationTransitionInfo());
         }
-    }
+
+        private async void Copy_Click(object sender, RoutedEventArgs e)
+        {
+            dataPackage.RequestedOperation = DataPackageOperation.Copy;
+            Clipboard.SetContent(dataPackage);
+            statusBar.IsOpen = true;
+            await Task.Delay(TimeSpan.FromSeconds(3));
+            statusBar.IsOpen = false;
+        }
+
+        private async void FileInfo_Click(object sender, RoutedEventArgs e)
+        {
+            
+            ImageProperties props = await temp.Properties.GetImagePropertiesAsync();
+
+            var requests = new System.Collections.Generic.List<string>();
+            requests.Add("System.Image.Dimensions");
+            requests.Add("System.Photo.Aperture");
+
+            IDictionary<string, object> retrievedProps = await props.RetrievePropertiesAsync(requests);
+
+            String dimensions = "null";
+            ushort dim;
+            if (retrievedProps.ContainsKey("System.Image.Dimensions"))
+            {
+                dim = (ushort)retrievedProps["System.Image.Dimensions"];
+                dimensions = dim.ToString();
+            }
+
+            String aperture = "null";
+            double aper;
+            if (retrievedProps.ContainsKey("System.Photo.Aperture"))
+            {
+                aper = (double)retrievedProps["System.Photo.Aperture"];
+            }
+            ContentDialog noWifiDialog = new ContentDialog
+            {
+                Title = "File Info",
+                Content = "Dimensions: " + dimensions+"\nnAperture: "+aperture,
+                CloseButtonText = "Close"
+            };
+
+            ContentDialogResult result = await noWifiDialog.ShowAsync();
+        }
+
+        private async void PiP_Click(object sender, RoutedEventArgs e)
+        {
+            await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay);
+        }
+
+        private async void AppBarButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            var view = ApplicationView.GetForCurrentView();
+            if (view.IsFullScreenMode)
+            {
+                view.ExitFullScreenMode();
+            }
+            else
+            {
+                view.TryEnterFullScreenMode();
+            }
+        }
+    } 
 }

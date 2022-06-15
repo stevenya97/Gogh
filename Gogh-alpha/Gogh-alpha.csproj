@@ -7,12 +7,12 @@
     <ProjectGuid>{CA4109A2-53AD-4FEC-9131-8B0BC57A1340}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gogh_alpha</RootNamespace>
-    <AssemblyName>Gogh-alpha</AssemblyName>
+    <RootNamespace>Gogh</RootNamespace>
+    <AssemblyName>Gogh</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -127,17 +127,17 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ImageCropper.xaml.cs">
+    <Compile Include="Views\ImageCropper.xaml.cs">
       <DependentUpon>ImageCropper.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.xaml.cs">
+    <Compile Include="Views\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SplitTest.xaml.cs">
+    <Compile Include="Views\SplitTest.xaml.cs">
       <DependentUpon>SplitTest.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -147,6 +147,31 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\BadgeLogo.scale-100.png" />
+    <Content Include="Assets\BadgeLogo.scale-125.png" />
+    <Content Include="Assets\BadgeLogo.scale-150.png" />
+    <Content Include="Assets\BadgeLogo.scale-200.png" />
+    <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\gogh-app.altform-lightunplated_targetsize-16.png" />
+    <Content Include="Assets\gogh-app.altform-lightunplated_targetsize-24.png" />
+    <Content Include="Assets\gogh-app.altform-lightunplated_targetsize-256.png" />
+    <Content Include="Assets\gogh-app.altform-lightunplated_targetsize-32.png" />
+    <Content Include="Assets\gogh-app.altform-lightunplated_targetsize-48.png" />
+    <Content Include="Assets\gogh-app.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\gogh-app.altform-unplated_targetsize-24.png" />
+    <Content Include="Assets\gogh-app.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\gogh-app.altform-unplated_targetsize-32.png" />
+    <Content Include="Assets\gogh-app.altform-unplated_targetsize-48.png" />
+    <Content Include="Assets\gogh-app.scale-100.png" />
+    <Content Include="Assets\gogh-app.scale-125.png" />
+    <Content Include="Assets\gogh-app.scale-150.png" />
+    <Content Include="Assets\gogh-app.scale-200.png" />
+    <Content Include="Assets\gogh-app.scale-400.png" />
+    <Content Include="Assets\gogh-app.targetsize-16.png" />
+    <Content Include="Assets\gogh-app.targetsize-24.png" />
+    <Content Include="Assets\gogh-app.targetsize-256.png" />
+    <Content Include="Assets\gogh-app.targetsize-32.png" />
+    <Content Include="Assets\gogh-app.targetsize-48.png" />
     <Content Include="Assets\gogh-tile.altform-lightunplated_targetsize-16.png" />
     <Content Include="Assets\gogh-tile.altform-lightunplated_targetsize-24.png" />
     <Content Include="Assets\gogh-tile.altform-lightunplated_targetsize-256.png" />
@@ -210,35 +235,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="ImageCropper.xaml">
+    <Page Include="Views\ImageCropper.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Settings.xaml">
+    <Page Include="Views\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SplitTest.xaml">
+    <Page Include="Views\SplitTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.10</Version>
+      <Version>6.2.13</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI">
-      <Version>6.1.1</Version>
+      <Version>7.1.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
-      <Version>6.1.0</Version>
+      <Version>7.1.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.4.3</Version>
+      <Version>2.7.1</Version>
     </PackageReference>
     <PackageReference Include="winrtxamltoolkit">
       <Version>2.3.0</Version>

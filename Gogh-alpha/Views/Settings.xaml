@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel Orientation="Vertical">
-        <AppBarButton x:Name="back"  Icon="Home" Label="Home" Click="back_Click"/>
+        <AppBarButton x:Name="back"  Icon="Back"  Click="back_Click" VerticalContentAlignment="Center"/>
         <TextBlock Text="Choose a mode"></TextBlock>
         <RadioButton Content="Light"  VerticalAlignment="Top"></RadioButton>
         <RadioButton Content="Dark"  VerticalAlignment="Top"></RadioButton>

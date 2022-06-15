@@ -18,7 +18,7 @@
             <StackPanel Orientation="Vertical">
                 <AppBarButton x:Name="back"  Icon="Home" Label="Home" />
                 <TextBlock Text="Choose a mode"></TextBlock>
-                <RadioButton Content="Light"  VerticalAlignment="Top"></RadioButton>
+                <RadioButton Content="Light" Click="RadioButton_Click"  VerticalAlignment="Top"></RadioButton>
                 <RadioButton Content="Dark"  VerticalAlignment="Top"></RadioButton>
                 <RadioButton Content="Windows default" VerticalAlignment="Top"></RadioButton>
                 <Button
@@ -26,6 +26,7 @@
                         HorizontalContentAlignment="Stretch"
                         Background="Transparent"
                         Command="{Binding LogoutCommand}"
+                        Click="Button_Click"
                         ToolTipService.ToolTip="Sign out">
                     <Grid Height="40" Margin="-9,0,0,0">
                         <Grid.ColumnDefinitions>
@@ -53,6 +54,7 @@
                    FontSize="24"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"/>
+            <Frame x:Name="frametest"/>
         </Grid>
         
     </SplitView>

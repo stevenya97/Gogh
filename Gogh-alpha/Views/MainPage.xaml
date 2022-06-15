@@ -28,12 +28,12 @@
     <Grid x:Name="grid">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="32"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="Auto" />
             <RowDefinition />
 
         </Grid.RowDefinitions>
-
+       
         <ScrollViewer 
             x:Name="ScrollViewerMain"
                 HorizontalScrollBarVisibility="Disabled"
@@ -43,7 +43,7 @@
                 Grid.Row="2"
                 ZoomMode="Enabled"
                 PointerWheelChanged="Image_PointerWheelChanged"
-                Background="{ThemeResource SystemChromeBlackHighColor}"
+                Background="{ThemeResource SystemControlAltLowAcrylicWindowBrush}"
             >
             <Image
                     x:Name="Img"
@@ -66,32 +66,45 @@
                 </Image.RenderTransform>
 
             </Image>
-
+            
 
 
         </ScrollViewer>
-        <muxc:TeachingTip x:Name="tip" Target="{x:Bind cmdbar}" Title="Extra commands" Subtitle="Click to reveal useful commands">
+        <muxc:InfoBar
+                IsOpen="False"
+                Severity="Success"
+                Title="Copied to Clipboard"
+                HorizontalContentAlignment="Center"
+                Message="" Margin="805,0,715,903" Grid.Row="2" IsClosable="False" Name="statusBar" />
+        <muxc:TeachingTip x:Name="tip" Target="{x:Bind cmdbar}" Title="Zooming" Subtitle="Ctrl+ Scroll Wheel to zoom" Margin="-10,65,10,903" Grid.Row="2" IsOpen="True">
 
         </muxc:TeachingTip>
-        <CommandBar x:Name="cmdbar" DefaultLabelPosition="Right" Grid.Row="1" IsOpen="False" Background="Transparent" VerticalAlignment="Center">
-            <AppBarButton Label="View original" Click="View_Original_Click">
-                <AppBarButton.Icon>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7B3;"/>
-                </AppBarButton.Icon>
-            </AppBarButton>
-            <AppBarButton Label="Rotate left" Click="RotLeftButton_Click">
-                <AppBarButton.Icon>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE777;"/>
-                </AppBarButton.Icon>
-            </AppBarButton>
-            <AppBarButton Icon="RepeatAll" Label="Rotate right" Click="RotRightButton_Click"/>
-            <AppBarButton Icon="Crop" Label="Crop" Click="Crop_Click"/>
-            <AppBarButton Icon="Edit" Label="Edit" Click="Edit_Click"/>
-            <AppBarSeparator/>
-            <AppBarButton Icon="Back" Label="Previous" />
+        
+        <CommandBar x:Name="cmdbar" DefaultLabelPosition="Collapsed" IsDynamicOverflowEnabled="False" Grid.Row="1" IsOpen="False"    VerticalAlignment="Center" Grid.ColumnSpan="1"  HorizontalContentAlignment="Center" >
+            
+            
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="BackToWindow" Label="PiP" Click="PiP_Click"/>
+                <AppBarButton Icon="FullScreen" Label="Fullscreen" Click="AppBarButton_Click_1"/>
+                <AppBarButton Label="View original" Click="View_Original_Click" >
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7B3;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton Label="Rotate left" Click="RotLeftButton_Click">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE777;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton Icon="RepeatAll" Label="Rotate right" Click="RotRightButton_Click"/>
+                <AppBarButton Icon="Crop" Label="Crop" Click="Crop_Click"/>
+                <AppBarButton Icon="Edit" Label="Edit" Click="Edit_Click" Margin="0,0,10,0"/>
+                <AppBarSeparator/>
 
-            <AppBarButton  Icon="Forward" Label="Next" />
+                <AppBarButton Icon="Back" Label="Previous" />
 
+                <AppBarButton  Icon="Forward" Label="Next" />
+            </CommandBar.PrimaryCommands>
 
             <CommandBar.SecondaryCommands >
                 <AppBarButton Icon="Save" Label="Save As">
@@ -100,7 +113,7 @@
                     </AppBarButton.KeyboardAccelerators>
                 </AppBarButton>
                 <AppBarButton Icon="Zoom"  Label="Resize" />
-                <AppBarButton Icon="Copy" Label="Copy">
+                <AppBarButton Icon="Copy" Label="Copy" Click="Copy_Click">
                     <AppBarButton.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="C"/>
                     </AppBarButton.KeyboardAccelerators>
@@ -112,7 +125,7 @@
                 <AppBarSeparator/>
                 <AppBarButton Icon="Preview"  Label="Zoom to Actual Size" Click="ActualSizeButton_Click"/>
                 <AppBarSeparator/>
-                <AppBarButton Icon="ContactInfo"  Label="File info" />
+                <AppBarButton Icon="ContactInfo"  Label="File info" Click="FileInfo_Click" />
                 <AppBarSeparator/>
                 <AppBarButton Icon="Setting"  Label="Settings" Click="Settings_Click"/>
             </CommandBar.SecondaryCommands>
@@ -121,8 +134,11 @@
                 <TextBlock x:Name="txt" Text="" Margin="12,14"/>
             </CommandBar.Content>
         </CommandBar>
-        
-        
+        <Popup>
+           <Grid Background="#FFE5E5E5"/>
+        </Popup>
+
+
 
     </Grid>
     

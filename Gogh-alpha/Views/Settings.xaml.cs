@@ -20,17 +20,16 @@ namespace Gogh_alpha
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SplitTest : Page
+    public sealed partial class Settings : Page
     {
-        public SplitTest()
+        public Settings()
         {
             this.InitializeComponent();
         }
 
-        private void but_Click(object sender, RoutedEventArgs e)
+        private void back_Click(object sender, RoutedEventArgs e)
         {
-            split.IsPaneOpen = true;
-            
+            this.Frame.GoBack();
         }
     }
 }
