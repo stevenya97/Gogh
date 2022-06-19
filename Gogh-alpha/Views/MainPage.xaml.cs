@@ -159,15 +159,17 @@ namespace Gogh_alpha
         void Image_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
 
         {
+            dblDelta_Scroll = 0;
             dblDelta_Scroll = -1 * e.GetCurrentPoint(Img).Properties.MouseWheelDelta;
-            double temp = dblDelta_Scroll;
+            
             dblDelta_Scroll = (dblDelta_Scroll > 0) ? 1.2 : -0.8;
             //e.GetCurrentPoint(sc)
+            double temp = dblDelta_Scroll;
             txt.Text = temp.ToString();
             //double to = dblDelta_Scroll + ScrollViewerMain.ZoomFactor;
             //WinRTXamlToolkit.Controls.Extensions.ScrollViewerExtensions.ZoomToFactorWithAnimationAsync(ScrollViewerMain, to);
-            double newvalue = e.GetCurrentPoint(sender as UIElement).Properties.MouseWheelDelta;
-            ScrollViewerMain.ChangeView(null, null, (float)newvalue);
+            //double newvalue = e.GetCurrentPoint(sender as UIElement).Properties.MouseWheelDelta;
+            ScrollViewerMain.ChangeView(null, null, (float)dblDelta_Scroll);
 
             //ZoomToFactorWithAnimationAsync(to, 350);
             //double new_ScaleX = this.Transform.ScaleX / dblDelta_Scroll;
@@ -328,7 +330,8 @@ namespace Gogh_alpha
 
         private async void FileInfo_Click(object sender, RoutedEventArgs e)
         {
-            
+            splitView.IsPaneOpen = true;
+            /*
             ImageProperties props = await temp.Properties.GetImagePropertiesAsync();
 
             var requests = new System.Collections.Generic.List<string>();
@@ -337,33 +340,54 @@ namespace Gogh_alpha
 
             IDictionary<string, object> retrievedProps = await props.RetrievePropertiesAsync(requests);
 
-            String dimensions = "null";
-            ushort dim;
+            //dimension
+            String dimensions = "N/A";
             if (retrievedProps.ContainsKey("System.Image.Dimensions"))
             {
-                dim = (ushort)retrievedProps["System.Image.Dimensions"];
-                dimensions = dim.ToString();
+                dimensions = (string)retrievedProps["System.Image.Dimensions"];
             }
 
-            String aperture = "null";
+            //aperture
+            String aperture = "N/A";
             double aper;
             if (retrievedProps.ContainsKey("System.Photo.Aperture"))
             {
                 aper = (double)retrievedProps["System.Photo.Aperture"];
             }
+
+            //width&height
+            String width = "N/A", height = "N/A";
+            if (retrievedProps.ContainsKey("System.Image.HorizontalSize"))
+            {
+                width = (string)retrievedProps["System.Image.HorizontalSize"];
+                height = (string)retrievedProps["System.Image.VerticalSize"];
+            }
+
+            //bit depth
+            String bitd="N/A";
+            if (retrievedProps.ContainsKey("System.Image.BitDepth"))
+            {
+                bitd = (string)retrievedProps["System.Image.BitDepth"];
+                
+            }
+
+            //final output
             ContentDialog noWifiDialog = new ContentDialog
             {
-                Title = "File Info",
-                Content = "Dimensions: " + dimensions+"\nnAperture: "+aperture,
+                Title = "Info",
+                Content = "Dimensions: " + dimensions+"\nAperture: "+aperture+"\nWidth: "+width+"\nHeight: "+height+"\nBit Depth: "+bitd,
+                
                 CloseButtonText = "Close"
             };
 
             ContentDialogResult result = await noWifiDialog.ShowAsync();
+            */
         }
 
         private async void PiP_Click(object sender, RoutedEventArgs e)
         {
-            await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay);
+            
+            bool modeSwitched = await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay);
         }
 
         private async void AppBarButton_Click_1(object sender, RoutedEventArgs e)
@@ -377,6 +401,11 @@ namespace Gogh_alpha
             {
                 view.TryEnterFullScreenMode();
             }
+        }
+
+        private void CloseSplit_Click(object sender, RoutedEventArgs e)
+        {
+            splitView.IsPaneOpen = false;
         }
     } 
 }

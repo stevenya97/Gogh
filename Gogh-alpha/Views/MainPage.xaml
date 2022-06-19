@@ -8,6 +8,8 @@
     xmlns:media="using:Microsoft.UI.Xaml.Media"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:extensions="using:WinRTXamlToolkit.Controls.Extensions"
+    NavigationCacheMode="Required"
+    
     
     Background="{ThemeResource SystemControlChromeMediumAcrylicWindowMediumBrush}">
     <!--{ThemeResource SystemControlAcrylicWindowBrush}-->
@@ -34,7 +36,58 @@
 
         </Grid.RowDefinitions>
        
-        <ScrollViewer 
+        
+        <SplitView x:Name="splitView" IsPaneOpen="False"
+           DisplayMode="Inline"
+           OpenPaneLength="500"
+           CompactPaneLength="0"
+           PanePlacement="Right" Grid.Row="2" BorderThickness="1">
+            <SplitView.Pane >
+                <StackPanel Orientation="Vertical">
+                    <Button FontFamily="Segoe MDL2 Assets"  Content="&#xE711;" Click="CloseSplit_Click" />
+                    <TextBlock Text="Info" FontSize="36"></TextBlock>
+                    <muxc:ProgressRing IsActive="True" />
+                    <Grid Padding="20,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text="&#xE8B9;" Grid.Column="0" Grid.Row="0">
+                            <ToolTipService.ToolTip>
+                                <ToolTip Content="Offset ToolTip." VerticalOffset="80"/>
+                            </ToolTipService.ToolTip>
+                        </TextBlock>
+                        <TextBlock  Text="File name" Grid.Column="1" Grid.Row="0"/>
+
+                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text="&#xE787;" Grid.Column="0" Grid.Row="1"/>
+                        <TextBlock  Text="Date" Grid.Column="1" Grid.Row="1"/>
+
+                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text="&#xEC92;" Grid.Column="0" Grid.Row="2"/>
+                        <TextBlock  Text="Time" Grid.Column="1" Grid.Row="2"/>
+
+                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text="&#xF156;" Grid.Column="0" Grid.Row="3"/>
+                        <TextBlock  Text="Size Info" Grid.Column="1" Grid.Row="3"/>
+
+                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text="&#xE71B;" Grid.Column="0" Grid.Row="4"/>
+                        <TextBlock  Text="Source" Grid.Column="1" Grid.Row="4"/>
+
+                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text="&#xED25;" Grid.Column="0" Grid.Row="5"/>
+                        <TextBlock  Text="Source" Grid.Column="1" Grid.Row="5"/>
+
+                    </Grid>
+                </StackPanel>
+               
+            </SplitView.Pane>
+            <ScrollViewer 
             x:Name="ScrollViewerMain"
                 HorizontalScrollBarVisibility="Disabled"
                 VerticalScrollBarVisibility="Disabled"
@@ -45,7 +98,7 @@
                 PointerWheelChanged="Image_PointerWheelChanged"
                 Background="{ThemeResource SystemControlAltLowAcrylicWindowBrush}"
             >
-            <Image
+                <Image
                     x:Name="Img"
                     MaxWidth="{Binding Path=ViewportWidth, ElementName=ScrollViewerMain}"
                     MaxHeight="{Binding Path=ViewportHeight, ElementName=ScrollViewerMain}"
@@ -61,26 +114,27 @@
                     
                     
                 >
-                <Image.RenderTransform>
-                    <CompositeTransform x:Name="Transform"  />
-                </Image.RenderTransform>
+                    <Image.RenderTransform>
+                        <CompositeTransform x:Name="Transform"  />
+                    </Image.RenderTransform>
 
-            </Image>
-            
+                </Image>
 
 
-        </ScrollViewer>
+
+            </ScrollViewer>
+        </SplitView>
         <muxc:InfoBar
                 IsOpen="False"
                 Severity="Success"
                 Title="Copied to Clipboard"
                 HorizontalContentAlignment="Center"
                 Message="" Margin="805,0,715,903" Grid.Row="2" IsClosable="False" Name="statusBar" />
-        <muxc:TeachingTip x:Name="tip" Target="{x:Bind cmdbar}" Title="Zooming" Subtitle="Ctrl+ Scroll Wheel to zoom" Margin="-10,65,10,903" Grid.Row="2" IsOpen="True">
+        <muxc:TeachingTip x:Name="tip" Target="{x:Bind cmdbar}" Title="Zooming" Subtitle="Ctrl+ Scroll Wheel to zoom" Margin="-10,65,10,903" Grid.Row="2" IsOpen="True" IsLightDismissEnabled="True" PreferredPlacement="Left">
 
         </muxc:TeachingTip>
         
-        <CommandBar x:Name="cmdbar" DefaultLabelPosition="Collapsed" IsDynamicOverflowEnabled="False" Grid.Row="1" IsOpen="False"    VerticalAlignment="Center" Grid.ColumnSpan="1"  HorizontalContentAlignment="Center" >
+        <CommandBar x:Name="cmdbar" DefaultLabelPosition="Collapsed" IsDynamicOverflowEnabled="False" Grid.Row="1" IsOpen="False"     Grid.ColumnSpan="1"  HorizontalContentAlignment="Left" >
             
             
             <CommandBar.PrimaryCommands>
@@ -131,7 +185,11 @@
             </CommandBar.SecondaryCommands>
 
             <CommandBar.Content>
-                <TextBlock x:Name="txt" Text="" Margin="12,14"/>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Assets/gogh-app.altform-lightunplated_targetsize-24.png"  Margin="20,5"/>
+                    <TextBlock x:Name="txt" Text="gogh.png" Margin="0,14"/>
+                </StackPanel>
+                
             </CommandBar.Content>
         </CommandBar>
         <Popup>
