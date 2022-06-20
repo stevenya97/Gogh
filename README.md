@@ -1,12 +1,14 @@
 # Gogh
 A Gallery App with Fluent Design. Based on Google's discontinued Picasa software.
 
-## Notion
-https://www.notion.so/Gogh-A-Gallery-App-with-Fluent-Design-a6d4e57855214b99b2ab1d8cbdcd1ece
-Link to my Notion page for Gogh. Will be updating this as development happens, including the mini Trello board. Will add sections for feedback TBD.
+![logo](https://github.com/stevenya97/gogh/blob/master/gogh03x.png?raw=true)
 
-## Current Roadmap 
-### Alpha - August 2020 
+## Notion
+https://stevenyang.co/gogh
+Link to my personal page for Gogh. Will be updating this as development happens, including the mini Trello board. Will add sections for feedback TBD.
+
+## Releases
+### Alpha 0.1 - August 2020 
 - Image handling (jpg, png, gif) 
 - Seamless prelaunch
 - UI/UX exploration
@@ -14,7 +16,7 @@ Link to my Notion page for Gogh. Will be updating this as development happens, i
 - Keyboard navigation 
 - Basic photo adjustments (orientation/flip) 
 
-### Initial Release? - Fall 2020 
+### Alpha 0.1.1 - Fall 2020 
 - Extended file support (RAW,WEBP,HEIC,TIFF,PDF)
 - Scrollable gallery 
 - Smooth zoom 
@@ -25,10 +27,25 @@ Link to my Notion page for Gogh. Will be updating this as development happens, i
 - Edit metadata
 - Preferences
 
-### Future Releases
-- Customizable UI
-- MiniView
-- AirPlay support
-- Chromecast?
-- Advanced photo adjustments (Color/exposure)
 
+### Initial Release 1.0 - Image Viewer - Summer 2022
+- Cropping
+- Basic file support (.jpg, .png, .gif, .heic)
+- Panning/zooming
+- Metadata reading/writing
+- Basic adjustments (orientation/flip)
+- Basic theming (light/dark/follow system)
+- File explorer integration
+- File association (set as default photo viewer)
+- Fullscreen support
+- Picture-in-Picture support (compact always-on-top window)
+- Connect support (Casting, media sharing)
+
+
+### Future 1.x Releases
+- Customizable UI
+- Theming
+- AirPlay support
+- Advanced photo adjustments (Color/exposure/filters)
+
+Last Updated June 2022
