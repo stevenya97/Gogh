@@ -5,6 +5,7 @@ A Photo App with Fluent Design. Inspired by Google's discontinued Picasa softwar
 
 ## Notion
 https://stevenyang.co/gogh
+
 Link to my personal page for Gogh. Will be updating this as development happens, including the mini Trello board. Will add sections for feedback TBD.
 
 ## Releases
