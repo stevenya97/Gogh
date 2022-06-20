@@ -1,5 +1,5 @@
 # Gogh
-A Gallery App with Fluent Design. Based on Google's discontinued Picasa software.
+A Photo App with Fluent Design. Inspired by Google's discontinued Picasa software.
 
 ![logo](https://github.com/stevenya97/gogh/blob/master/gogh03x.png?raw=true)
 
