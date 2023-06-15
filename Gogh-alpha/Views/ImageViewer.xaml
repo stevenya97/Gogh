@@ -35,18 +35,22 @@
             <RowDefinition />
 
         </Grid.RowDefinitions>
-       
-        
+
+
         <SplitView x:Name="splitView" IsPaneOpen="False"
-           DisplayMode="Inline"
-           OpenPaneLength="500"
+           DisplayMode="Overlay"
+           OpenPaneLength="400"
            CompactPaneLength="0"
-           PanePlacement="Right" Grid.Row="2" BorderThickness="1">
+           PanePlacement="Right" Grid.Row="2" BorderThickness="1" >
             <SplitView.Pane >
                 <StackPanel Orientation="Vertical">
-                    <Button FontFamily="Segoe MDL2 Assets"  Content="&#xE711;" Click="CloseSplit_Click" />
-                    <TextBlock Text="Info" FontSize="36"></TextBlock>
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Info" FontSize="36" Margin="20" Padding="0"></TextBlock>
+                        <Button FontFamily="Segoe MDL2 Assets"  Content="&#xE711;" Click="CloseSplit_Click" Padding="10" Margin="20" HorizontalAlignment="Right" />
+                    </StackPanel>
+                    
                     <muxc:ProgressRing IsActive="True" />
+                    
                     <Grid Padding="20,0,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
@@ -61,34 +65,37 @@
                             <RowDefinition Height="50"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text="&#xE8B9;" Grid.Column="0" Grid.Row="0">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text="&#xE8B9;" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">
                             <ToolTipService.ToolTip>
-                                <ToolTip Content="Offset ToolTip." VerticalOffset="80"/>
+                                <ToolTip Content="File Name" VerticalOffset="80"/>
                             </ToolTipService.ToolTip>
                         </TextBlock>
-                        <TextBlock  Text="File name" Grid.Column="1" Grid.Row="0"/>
+                        <!--<TextBlock  Text="File name" Grid.Column="1" Grid.Row="0"/>-->
+                        <TextBox  Text="File Name" Width="200" Height="5" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"/>
 
-                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text="&#xE787;" Grid.Column="0" Grid.Row="1"/>
-                        <TextBlock  Text="Date" Grid.Column="1" Grid.Row="1"/>
+                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text="&#xE787;" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
+                        <!--<TextBlock  Text="Date" Grid.Column="1" Grid.Row="1"/>-->
+                        <DatePicker Width="200" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"/>
 
-                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text="&#xEC92;" Grid.Column="0" Grid.Row="2"/>
-                        <TextBlock  Text="Time" Grid.Column="1" Grid.Row="2"/>
+                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text="&#xEC92;" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
+                        <!--<TextBlock  Text="Time" Grid.Column="1" Grid.Row="2"/>-->
+                        <TimePicker Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left"/>
 
-                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text="&#xF156;" Grid.Column="0" Grid.Row="3"/>
+                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text="&#xF156;" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"/>
                         <TextBlock  Text="Size Info" Grid.Column="1" Grid.Row="3"/>
 
-                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text="&#xE71B;" Grid.Column="0" Grid.Row="4"/>
+                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text="&#xE71B;" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center"/>
                         <TextBlock  Text="Source" Grid.Column="1" Grid.Row="4"/>
 
-                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text="&#xED25;" Grid.Column="0" Grid.Row="5"/>
-                        <TextBlock  Text="Source" Grid.Column="1" Grid.Row="5"/>
+                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="16" Text="&#xED25;" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center"/>
+                        <TextBlock  Text="Path" Grid.Column="1" Grid.Row="5"/>
 
                     </Grid>
                 </StackPanel>
-               
+
             </SplitView.Pane>
             <ScrollViewer 
-            x:Name="ScrollViewerMain"
+                x:Name="ScrollViewerMain"
                 HorizontalScrollBarVisibility="Disabled"
                 VerticalScrollBarVisibility="Disabled"
                 MinZoomFactor="0.1" 
@@ -96,7 +103,7 @@
                 Grid.Row="2"
                 ZoomMode="Enabled"
                 PointerWheelChanged="Image_PointerWheelChanged"
-                Background="{ThemeResource SystemControlAltLowAcrylicWindowBrush}"
+                Background="{ThemeResource SystemControlAltLowAcrylicWindowBrush}" 
             >
                 <Image
                     x:Name="Img"
@@ -129,17 +136,21 @@
                 Severity="Success"
                 Title="Copied to Clipboard"
                 HorizontalContentAlignment="Center"
-                Message="" Margin="805,0,715,903" Grid.Row="2" IsClosable="False" Name="statusBar" />
+                Message="" Margin="805,0,715,903" Grid.Row="2" IsClosable="False" x:Name="statusBar" />
         <muxc:TeachingTip x:Name="tip" Target="{x:Bind cmdbar}" Title="Zooming" Subtitle="Ctrl+ Scroll Wheel to zoom" Margin="-10,65,10,903" Grid.Row="2" IsOpen="True" IsLightDismissEnabled="True" PreferredPlacement="Left">
 
         </muxc:TeachingTip>
-        
-        <CommandBar x:Name="cmdbar" DefaultLabelPosition="Collapsed" IsDynamicOverflowEnabled="False" Grid.Row="1" IsOpen="False"     Grid.ColumnSpan="1"  HorizontalContentAlignment="Left" >
-            
-            
+
+        <CommandBar x:Name="cmdbar" DefaultLabelPosition="Collapsed" IsDynamicOverflowEnabled="True" Grid.Row="1" IsOpen="False"   Grid.ColumnSpan="1"  HorizontalContentAlignment="Left" VerticalAlignment="Center" >
+
+
             <CommandBar.PrimaryCommands>
+                <AppBarButton Label="Cast" Click="CastButton_Click" IsEnabled="False" Visibility="Collapsed">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEC15;"/> 
+                </AppBarButton>
                 <AppBarButton Icon="BackToWindow" Label="PiP" Click="PiP_Click"/>
-                <AppBarButton Icon="FullScreen" Label="Fullscreen" Click="AppBarButton_Click_1"/>
+                <AppBarButton Icon="FullScreen" Label="Fullscreen" Click="FullscreenButton_Click_1"/>
+                <AppBarSeparator/>
                 <AppBarButton Label="View original" Click="View_Original_Click" >
                     <AppBarButton.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7B3;"/>
@@ -147,17 +158,24 @@
                 </AppBarButton>
                 <AppBarButton Label="Rotate left" Click="RotLeftButton_Click">
                     <AppBarButton.Icon>
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE777;"/>
+                        <FontIcon FontFamily="Segoe MDL2 Assets"  Glyph="&#xE777;"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
-                <AppBarButton Icon="RepeatAll" Label="Rotate right" Click="RotRightButton_Click"/>
+                <AppBarButton Label="Rotate right" RenderTransformOrigin="0.5,0.5" Click="RotRightButton_Click">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets"  Glyph="&#xE777;"/>
+                    </AppBarButton.Icon>
+                    <AppBarButton.RenderTransform>
+                        <ScaleTransform ScaleX="-1"/>
+                    </AppBarButton.RenderTransform>
+                </AppBarButton>
+
                 <AppBarButton Icon="Crop" Label="Crop" Click="Crop_Click"/>
-                <AppBarButton Icon="Edit" Label="Edit" Click="Edit_Click" Margin="0,0,10,0"/>
+                <AppBarButton Icon="Edit" Label="Edit" Click="Edit_Click" IsEnabled="False" Margin="0,0,10,0"/>
                 <AppBarSeparator/>
 
-                <AppBarButton Icon="Back" Label="Previous" />
-
-                <AppBarButton  Icon="Forward" Label="Next" />
+                <AppBarButton Icon="Back" Label="Previous" IsEnabled="False"/>
+                <AppBarButton  Icon="Forward" Label="Next" IsEnabled="False"/>
             </CommandBar.PrimaryCommands>
 
             <CommandBar.SecondaryCommands >
@@ -166,7 +184,11 @@
                         <KeyboardAccelerator Modifiers="Control" Key="S"/>
                     </AppBarButton.KeyboardAccelerators>
                 </AppBarButton>
-                <AppBarButton Icon="Zoom"  Label="Resize" />
+                <AppBarButton  Label="Resize" >
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets"  Glyph="&#xE759;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
                 <AppBarButton Icon="Copy" Label="Copy" Click="Copy_Click">
                     <AppBarButton.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="Control" Key="C"/>
@@ -176,6 +198,7 @@
                 <AppBarSeparator/>
                 <AppBarButton Icon="OpenWith" Label="Open with" Click="OpenWith_ClickAsync"/>
                 <AppBarButton Icon="SetLockScreen" Label="Set as" />
+                <AppBarButton Icon="Print" Label="Print"/>
                 <AppBarSeparator/>
                 <AppBarButton Icon="Preview"  Label="Zoom to Actual Size" Click="ActualSizeButton_Click"/>
                 <AppBarSeparator/>
@@ -187,18 +210,24 @@
             <CommandBar.Content>
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/gogh-app.altform-lightunplated_targetsize-24.png"  Margin="20,5"/>
-                    <TextBlock x:Name="txt" Text="gogh.png" Margin="0,14"/>
+                    <TextBlock x:Name="fileName" Text="gogh.png" Margin="0,14"/>
+                    <TextBlock x:Name="txt" Text="test" />
                 </StackPanel>
-                
+
             </CommandBar.Content>
+            <CommandBar.CommandBarOverflowPresenterStyle>
+                <Style TargetType="CommandBarOverflowPresenter">
+                    <Setter Property="Background" Value="{ThemeResource SystemControlAltLowAcrylicWindowBrush}"/>
+                </Style>
+            </CommandBar.CommandBarOverflowPresenterStyle>
         </CommandBar>
         <Popup>
-           <Grid Background="#FFE5E5E5"/>
+            <Grid Background="#FFE5E5E5"/>
         </Popup>
 
 
 
     </Grid>
-    
+
 </Page>
     

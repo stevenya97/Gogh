@@ -23,6 +23,11 @@ using WinRTXamlToolkit.AwaitableUI;
 using WinRTXamlToolkit.Controls.Extensions;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage.FileProperties;
+//Casting
+using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
+using Windows.Media.Core;
+using Windows.ApplicationModel.Core;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -45,7 +50,9 @@ namespace Gogh_alpha
 
             this.InitializeComponent();
             InitialZoom();
-            
+            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            coreTitleBar.ExtendViewIntoTitleBar = true;
+
             //txt.Text = Img.Source;
             void MaximizeWindowOnLoad()
             {
@@ -126,7 +133,7 @@ namespace Gogh_alpha
                 BitmapImage imagebit = new BitmapImage();
                 imagebit.SetSource(read);
                 Img.Source = imagebit;
-                //txt.Text = imagebit.UriSource.ToString();
+                txt.Text = Img.Source.ToString();
                 
                 
             }
@@ -146,7 +153,7 @@ namespace Gogh_alpha
         {
             //this.Transform.TranslateX += e.Delta.Translation.X/ ScrollViewerMain.ZoomFactor;
             //this.Transform.TranslateY += e.Delta.Translation.Y/ ScrollViewerMain.ZoomFactor;
-            ScrollViewerMain.ChangeView(e.Delta.Translation.X, e.Delta.Translation.Y, null);
+            //ScrollViewerMain.ChangeView(e.Delta.Translation.X, e.Delta.Translation.Y, null);
             
         }
 
@@ -165,7 +172,7 @@ namespace Gogh_alpha
             dblDelta_Scroll = (dblDelta_Scroll > 0) ? 1.2 : -0.8;
             //e.GetCurrentPoint(sc)
             double temp = dblDelta_Scroll;
-            txt.Text = temp.ToString();
+            //fileName.Text = temp.ToString();
             //double to = dblDelta_Scroll + ScrollViewerMain.ZoomFactor;
             //WinRTXamlToolkit.Controls.Extensions.ScrollViewerExtensions.ZoomToFactorWithAnimationAsync(ScrollViewerMain, to);
             //double newvalue = e.GetCurrentPoint(sender as UIElement).Properties.MouseWheelDelta;
@@ -214,6 +221,7 @@ namespace Gogh_alpha
         {
             from += 90;
             AnimateRotation(from);
+            txt.Text = from.ToString();
         }
         //Rotate right
         void RotLeftButton_Click(object sender, RoutedEventArgs e)
@@ -297,8 +305,16 @@ namespace Gogh_alpha
         {
             this.Transform.TranslateX = 0;
             this.Transform.TranslateY = 0;
-            from = 0;
-            AnimateRotation(from);
+            if(from!=360)
+            {
+                from = 0;
+                AnimateRotation(from);
+            }
+            else
+            {
+                //TODO need to normalize rotation past 360 degrees
+            }
+            
             bool flag = ScrollViewerMain.ChangeView(null, null, 1);
             
         }
@@ -331,7 +347,7 @@ namespace Gogh_alpha
         private async void FileInfo_Click(object sender, RoutedEventArgs e)
         {
             splitView.IsPaneOpen = true;
-            /*
+
             ImageProperties props = await temp.Properties.GetImagePropertiesAsync();
 
             var requests = new System.Collections.Generic.List<string>();
@@ -364,24 +380,24 @@ namespace Gogh_alpha
             }
 
             //bit depth
-            String bitd="N/A";
+            String bitd = "N/A";
             if (retrievedProps.ContainsKey("System.Image.BitDepth"))
             {
                 bitd = (string)retrievedProps["System.Image.BitDepth"];
-                
+
             }
 
             //final output
             ContentDialog noWifiDialog = new ContentDialog
             {
                 Title = "Info",
-                Content = "Dimensions: " + dimensions+"\nAperture: "+aperture+"\nWidth: "+width+"\nHeight: "+height+"\nBit Depth: "+bitd,
-                
+                Content = "Dimensions: " + dimensions + "\nAperture: " + aperture + "\nWidth: " + width + "\nHeight: " + height + "\nBit Depth: " + bitd,
+
                 CloseButtonText = "Close"
             };
 
             ContentDialogResult result = await noWifiDialog.ShowAsync();
-            */
+
         }
 
         private async void PiP_Click(object sender, RoutedEventArgs e)
@@ -390,7 +406,7 @@ namespace Gogh_alpha
             bool modeSwitched = await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay);
         }
 
-        private async void AppBarButton_Click_1(object sender, RoutedEventArgs e)
+        private void FullscreenButton_Click_1(object sender, RoutedEventArgs e)
         {
             var view = ApplicationView.GetForCurrentView();
             if (view.IsFullScreenMode)
@@ -406,6 +422,11 @@ namespace Gogh_alpha
         private void CloseSplit_Click(object sender, RoutedEventArgs e)
         {
             splitView.IsPaneOpen = false;
+        }
+
+        private void CastButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     } 
 }

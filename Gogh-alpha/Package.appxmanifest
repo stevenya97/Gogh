@@ -17,7 +17,7 @@
   <mp:PhoneIdentity PhoneProductId="77548637-7104-4841-bacf-a85b2b893786" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>Gogh-alpha</DisplayName>
+    <DisplayName>Gogh</DisplayName>
     <PublisherDisplayName>steve</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -33,12 +33,12 @@
   <Applications>
     <Application Id="App"
       Executable="$targetnametoken$.exe"
-      EntryPoint="Gogh_alpha.App">
+      EntryPoint="Gogh.App">
       <uap:VisualElements
-        DisplayName="Gogh-alpha"
+        DisplayName="Gogh"
         Square150x150Logo="Assets\gogh-tile.png"
         Square44x44Logo="Assets\gogh-app.png"
-        Description="Gogh-alpha"
+        Description="Gogh"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
 		<uap:SplashScreen Image="Assets\SplashScreen.png" uap5:Optional="true"  BackgroundColor="whiteSmoke"/>
