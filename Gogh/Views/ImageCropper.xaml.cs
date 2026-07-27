@@ -19,7 +19,7 @@ using Windows.ApplicationModel.Core;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Gogh_alpha
+namespace Gogh
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -52,7 +52,7 @@ namespace Gogh_alpha
                     var read = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
                     BitmapImage imagebit = new BitmapImage();
                     imagebit.SetSource(read);
-                    transition.Source = imagebit;
+                    //transition.Source = imagebit;
                     await imageCropper.LoadImageFromFile(file);
                 }
                 else
@@ -70,7 +70,7 @@ namespace Gogh_alpha
                 var anim = ConnectedAnimationService.GetForCurrentView().GetAnimation("ForwardConnectedAnimation");
                 if (anim != null)
                 {
-                    anim.TryStart(transition);
+                    anim.TryStart(imageCropper);
                 }
 
             }
@@ -88,14 +88,14 @@ namespace Gogh_alpha
             if (e.NavigationMode == NavigationMode.Back)
             {
                 ConnectedAnimation animation =
-                    ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("backAnimation", transition);
+                    ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("backAnimation", imageCropper);
 
                 // Use the recommended configuration for back animation.
                 animation.Configuration = new DirectConnectedAnimationConfiguration();
             }
             else
             {
-                ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("backAnimation", transition);
+                ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("backAnimation", imageCropper);
             }
         }
     }

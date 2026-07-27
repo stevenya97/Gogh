@@ -10,15 +10,15 @@
   IgnorableNamespaces="uap mp uap5 rescap uap6">
 
   <Identity
-    Name="77548637-7104-4841-bacf-a85b2b893786"
+    Name="gogh"
     Publisher="CN=steve"
-    Version="0.1.0.0" />
+    Version="0.1.1.0" />
 
   <mp:PhoneIdentity PhoneProductId="77548637-7104-4841-bacf-a85b2b893786" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Gogh</DisplayName>
-    <PublisherDisplayName>steve</PublisherDisplayName>
+    <PublisherDisplayName>Steven Y</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -38,10 +38,10 @@
         DisplayName="Gogh"
         Square150x150Logo="Assets\gogh-tile.png"
         Square44x44Logo="Assets\gogh-app.png"
-        Description="Gogh"
+        Description="A photo viewer for Windows"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
-		<uap:SplashScreen Image="Assets\SplashScreen.png" uap5:Optional="true"  BackgroundColor="whiteSmoke"/>
+		<uap:SplashScreen Image="Assets\SplashScreen.png" uap5:Optional="true"  />
         <uap:InitialRotationPreference>
           <uap:Rotation Preference="landscape"/></uap:InitialRotationPreference>
         <uap:LockScreen BadgeLogo="Assets\BadgeLogo.png" Notification="badge"/>
@@ -67,8 +67,7 @@
   </Applications>
 
   <Capabilities>
-    <Capability Name="internetClient" />
-	<rescap:Capability Name="broadFileSystemAccess" />
+	  <!--<rescap:Capability Name="broadFileSystemAccess" />-->
     <uap6:Capability Name="graphicsCapture"/>
     <uap:Capability Name="picturesLibrary"/>
     <uap:Capability Name="removableStorage"/>

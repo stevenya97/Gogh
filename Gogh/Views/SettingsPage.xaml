@@ -1,0 +1,225 @@
+﻿<Page
+    x:Class="Gogh.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Gogh"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <ScrollViewer
+            Grid.Row="0">
+            <StackPanel
+                Orientation="Vertical"
+                Padding="50,0,50,50">
+                <AppBarButton
+                    x:Name="back"
+                    Icon="Back"
+                    Click="back_Click"
+                    VerticalContentAlignment="Center" />
+                <TextBlock
+                    Text="Settings"
+                    Style="{StaticResource TitleTextBlockStyle}"
+                    Margin="0,10,0,0" />
+
+                <TextBlock
+                    Text="Color Theme"
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,30,0,0" />
+                <RadioButton
+                    Content="Light"
+                    VerticalAlignment="Top"></RadioButton>
+                <RadioButton
+                    Content="Dark"
+                    VerticalAlignment="Top"></RadioButton>
+                <RadioButton
+                    Content="Follow System Theme"
+                    VerticalAlignment="Top"></RadioButton>
+
+                <TextBlock
+                    Text="Material Theme"
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,30,0,0" />
+                <RadioButton
+                    Content="Acrylic"
+                    VerticalAlignment="Top"></RadioButton>
+                <RadioButton
+                    Content="Mica"
+                    VerticalAlignment="Top"></RadioButton>
+                <RadioButton
+                    Content="Solid Color"
+                    VerticalAlignment="Top"></RadioButton>
+
+                <StackPanel
+                    Visibility="Collapsed">
+                    <TextBlock
+                        Style="{StaticResource SubtitleTextBlockStyle}"
+                        Margin="0,40,0,0"
+                        Text="External Services"
+                        SelectionChanged="TextBlock_SelectionChanged" />
+                    <TextBlock> Upload images to cloud storage.</TextBlock>
+                    <StackPanel
+                        Margin="0,10,0,0">
+                        <ToggleSwitch
+                            x:Name="EnableOneDriveToggle"
+                            Toggled="EnableOneDrive_Toggled"
+                            OffContent="OneDrive Disconnected"
+                            OnContent="OneDrive Connected"
+                            IsEnabled="False" />
+                        <TextBlock
+                            Style="{ThemeResource CaptionTextBlockStyle}"
+                            FontStyle="Italic"
+                            Margin="0,8,0,0">
+                        Requires OneDrive to be installed and signed in to.
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel
+                        Margin="0,10,0,0">
+                        <ToggleSwitch
+                            x:Name="EnableiCloudToggle"
+                            Toggled="EnableiCloud_Toggled"
+                            OffContent="iCloud Disconnected"
+                            OnContent="iCloud Connected"
+                            IsEnabled="False" />
+                        <TextBlock
+                            Style="{ThemeResource CaptionTextBlockStyle}"
+                            FontStyle="Italic"
+                            Margin="0,8,0,0">
+                        Requires iCloud to be installed and signed in to.
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Permissions" />
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="Permissions" />
+                <StackPanel
+                    Margin="0,10,0,0">
+                    <Button
+                        Click="OpenSystemPermissions"
+                        ToolTipService.ToolTip="Open Windows Settings"
+                        Content="Open System Settings"
+                        Margin="0,12,0,0"
+                        Command="{Binding OpenSystemPermissions}" />
+                    <TextBlock
+                        Style="{ThemeResource CaptionTextBlockStyle}"
+                        FontStyle="Italic"
+                        Margin="0,8,0,0">
+                        Please grant file system permission to allow Gogh to access user files.  .<LineBreak />Gogh uses these permissions to access user files. .
+                    </TextBlock>
+                </StackPanel>
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,40,0,0"
+                    Text="About" />
+                <muxc:Expander
+                    HorizontalAlignment="Stretch">
+                    <muxc:Expander.Header>
+                        <StackPanel
+                            Orientation="Horizontal">
+                            <Image
+                                Source="/Assets/gogh-app.altform-lightunplated_targetsize-24.png"
+                                Margin="0,0,14,0" />
+                            <StackPanel>
+                                <TextBlock
+                                    Text="Gogh" />
+                                <TextBlock
+                                    Text="Copyright &#169; 2026. All rights reserved."
+                                    FontSize="12"
+                                    Foreground="Gray" />
+                            </StackPanel>
+                            <TextBlock>
+                                Version: 
+                                <Run
+                                    Text="{x:Bind Version}" />
+                            </TextBlock>
+
+                        </StackPanel>
+
+                    </muxc:Expander.Header>
+                    <muxc:Expander.Content>
+                        <Grid>
+                            <Button
+                                Margin="15"
+                                Content="This is a Button in the content" />
+                            <HyperlinkButton
+                                Content="View GitHub repository"
+                                NavigateUri="https://github.com/stevenya97/gogh" />
+                        </Grid>
+                    </muxc:Expander.Content>
+
+                </muxc:Expander>
+                <RichTextBlock
+                    Margin="0,12,0,0">
+                    <Paragraph>
+                        Gogh is a photo viewer with modern UI.
+                    </Paragraph>
+                    <Paragraph
+                        Margin="0,12,0,0">
+                        Github:
+                        <Hyperlink
+                            NavigateUri="https://github.com/stevenya97/gogh">stevenya97/gogh</Hyperlink>
+                    </Paragraph>
+                    <Paragraph
+                        Margin="0,0,0,0">
+                        Twitter:
+                        <Hyperlink
+                            NavigateUri="https://twitter.com/gogh_app">@gogh_app</Hyperlink>
+                    </Paragraph>
+                    <Paragraph
+                        Margin="0,0,0,0">
+                        Website:
+                        <Hyperlink
+                            NavigateUri="https://www.reddit.com/r/DLSS_Swapper/">stevenyang.co/gogh</Hyperlink>
+                    </Paragraph>
+                </RichTextBlock>
+                <TextBlock
+                    Margin="0,12,0,0">
+                    Version: 
+                    <Run
+                        Text="{x:Bind Version}" />
+                </TextBlock>
+                <Button
+                    Content="Check for updates"
+                    Margin="0,12,0,0"
+                    Command="{Binding CheckForUpdatesCommand}" />
+                <Button
+                    Background="Transparent"
+                    Command="{Binding LogoutCommand}"
+                    ToolTipService.ToolTip="Sign out"
+                    Width="187"
+                    Visibility="Collapsed">
+                    <Grid
+                        Height="40"
+                        Margin="-9,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
+                                Width="48" />
+                            <ColumnDefinition
+                                Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <SymbolIcon
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Symbol="People" />
+                        <TextBlock
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="Sign out" />
+                    </Grid>
+                </Button>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+
+</Page>

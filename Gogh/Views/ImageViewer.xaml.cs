@@ -28,10 +28,11 @@ using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.Media.Core;
 using Windows.ApplicationModel.Core;
+using System.Diagnostics;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
-namespace Gogh_alpha
+namespace Gogh
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -52,7 +53,9 @@ namespace Gogh_alpha
             InitialZoom();
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
-
+            //set command bar as title bar
+            Window.Current.SetTitleBar(AppTitleBar);
+            
             //txt.Text = Img.Source;
             void MaximizeWindowOnLoad()
             {
@@ -74,12 +77,6 @@ namespace Gogh_alpha
                 
             }
 
-            //legacy support test
-            async void ScreenCap()
-            {
-                var renderTargetBitmap = new RenderTargetBitmap();
-                await renderTargetBitmap.RenderAsync(Window.Current.Content);
-            }
             void InitialZoom()
             {
                 //ScrollViewerMain.ChangeView(null, null, 1.0f);
@@ -108,11 +105,11 @@ namespace Gogh_alpha
                     var file = (StorageFile)fileArgs.Files[0];
                     await LoadImageFile(file);
                     temp = file;
-                    txt.Text = strFilePath;
+                    fileName.Text = strFilePath;
                     path = strFilePath;
 
                     String t = temp.Path.ToString();
-                    System.Diagnostics.Debug.WriteLine("line test \n" + t);
+                    //System.Diagnostics.Debug.WriteLine("line test \n" + t);
                 }
             }
         }
@@ -133,9 +130,9 @@ namespace Gogh_alpha
                 BitmapImage imagebit = new BitmapImage();
                 imagebit.SetSource(read);
                 Img.Source = imagebit;
-                txt.Text = Img.Source.ToString();
-                
-                
+                fileName.Text = Img.Source.ToString();
+                temp = file;
+                Img.Visibility = Visibility.Visible;
             }
             catch (Exception e)
             {
@@ -221,7 +218,7 @@ namespace Gogh_alpha
         {
             from += 90;
             AnimateRotation(from);
-            txt.Text = from.ToString();
+            //txt.Text = from.ToString();
         }
         //Rotate right
         void RotLeftButton_Click(object sender, RoutedEventArgs e)
@@ -248,7 +245,7 @@ namespace Gogh_alpha
                     CloseButtonText = "Ok"
                 };
                 ContentDialogResult result = await noWifiDialog.ShowAsync();
-                tip.IsOpen = true;
+                zoomtip.IsOpen = true;
             }
             
         }
@@ -332,7 +329,7 @@ namespace Gogh_alpha
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Settings), new SuppressNavigationTransitionInfo());
+            this.Frame.Navigate(typeof(SettingsPage), new SuppressNavigationTransitionInfo());
         }
 
         private async void Copy_Click(object sender, RoutedEventArgs e)
@@ -347,6 +344,7 @@ namespace Gogh_alpha
         private async void FileInfo_Click(object sender, RoutedEventArgs e)
         {
             splitView.IsPaneOpen = true;
+            
 
             ImageProperties props = await temp.Properties.GetImagePropertiesAsync();
 
@@ -402,8 +400,11 @@ namespace Gogh_alpha
 
         private async void PiP_Click(object sender, RoutedEventArgs e)
         {
-            
-            bool modeSwitched = await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay);
+
+            //bool modeSwitched = await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay);
+            await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay);
+            Frame.Navigate(typeof(CompactViewer), null, new SuppressNavigationTransitionInfo());
+
         }
 
         private void FullscreenButton_Click_1(object sender, RoutedEventArgs e)
@@ -412,10 +413,12 @@ namespace Gogh_alpha
             if (view.IsFullScreenMode)
             {
                 view.ExitFullScreenMode();
+                fullscrn_tog.Icon = new SymbolIcon(Symbol.FullScreen);
             }
             else
             {
                 view.TryEnterFullScreenMode();
+                fullscrn_tog.Icon = new SymbolIcon(Symbol.BackToWindow);
             }
         }
 

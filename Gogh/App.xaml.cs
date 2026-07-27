@@ -16,14 +16,16 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
+using System.Reflection;
 
-namespace Gogh_alpha
+namespace Gogh
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
     sealed partial class App : Application
     {
+        public static App CurrentApp => (App)Application.Current;
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -142,6 +144,24 @@ namespace Gogh_alpha
                 // changes both the back button and resize/close buttons color too
                 titleBar.ButtonBackgroundColor = Windows.UI.Colors.Transparent;
             }
+        }
+        public Version GetVersion()
+        {
+            return Assembly.GetExecutingAssembly().GetName().Version;
+        }
+
+        public string GetVersionString()
+        {
+            var version = GetVersion();
+            if (version.Build == 0 && version.Revision == 0)
+            {
+                return $"{version.Major}.{version.Minor}";
+            }
+            else if (version.Revision == 0)
+            {
+                return $"{version.Major}.{version.Minor}.{version.Build}";
+            }
+            return $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
         }
     }
 }

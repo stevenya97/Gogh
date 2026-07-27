@@ -15,21 +15,32 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Gogh_alpha
+namespace Gogh
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Settings : Page
+    public sealed partial class SplitTest : Page
     {
-        public Settings()
+        public SplitTest()
         {
             this.InitializeComponent();
         }
 
-        private void back_Click(object sender, RoutedEventArgs e)
+        private void but_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.GoBack();
+            split.IsPaneOpen = true;
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            frametest.Navigate(typeof(MainPage));
+        }
+
+        private void RadioButton_Click(object sender, RoutedEventArgs e)
+        {
+            frametest.Navigate(typeof(ImageCropper));
         }
     }
 }
